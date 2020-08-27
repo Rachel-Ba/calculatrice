@@ -1,0 +1,124 @@
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+
+<script>
+var nombres ='', memoires ='';
+
+function bt(nbr) 
+{
+	nombres += nbr; 
+    for (var i = 0; i < nombres.length; i++)
+    {
+    	if(nombres.substring(0,1) === '+')
+    		{
+        		nombres = nombres.substring(0, i); 
+        		document.getElementById('results').innerHTML = '';
+        	}
+     	else if (nombres.substring(0,1) === '/')
+     		{
+      			nombres = nombres.substring(0, i); 
+        		document.getElementById('results').innerHTML = '';
+     		}
+     	else if (nombres.substring(0,1) === '*')
+     		{
+     	 		nombres = nombres.substring(0, i); 
+        		document.getElementById('results').innerHTML = '';
+     		}     
+     	else
+     		{
+		document.getElementById('results').innerHTML = nombres;
+     		} 
+     }
+}
+ 
+function clearValue()
+{
+	for (var i = 0; i < nombres.length; i++) 
+    {
+		nombres = nombres.substring(0, i);   
+		document.getElementById('results').innerHTML = nombres;
+    }
+    for (var i = 0; i < memoires.length; i++) 
+    {
+    	memoires = memoires.substring(0, i);
+        document.getElementById('memo').innerHTML = memoires;
+    }
+}
+
+
+function plusmoins()
+{
+    if(nombres.substring(0,1))
+    	{
+        document.getElementById('results').innerHTML = -nombres;
+        }
+     else
+     {
+		document.getElementById('results').innerHTML = nombres;
+     }
+}
+
+function pourcent()
+{
+	var resultat_final = document.getElementById('results').value;
+    results=(resultat_final/100);
+    document.getElementById('results').innerHTML = results;
+    nombres = document.getElementById('results').value;
+}
+
+function del(nbr)
+{
+	nombres = nombres.substring(0, nombres.length-1);
+	document.getElementById('results').innerHTML = nombres;
+
+}
+
+function calcul()
+{
+  	resultat_final = document.getElementById('results').value;
+  	results = eval(resultat_final);
+    results = Math.round(results*1000000000)/1000000000;
+    
+    memoires =  document.getElementById('results').innerHTML;    
+    document.getElementById('memo').innerHTML = memoires;
+    
+  	document.getElementById('results').innerHTML = results;
+	nombres = document.getElementById('results').value;
+
+}
+
+</script>
+
+<span>
+
+<H1><textarea id="memo"></textarea><br><textarea id="results"></textarea></H1>
+
+<button class="inst" onclick="clearValue()" value="C">C</button>
+<button class="inst" id="plusmoins" value="+/-" onclick="plusmoins()">+/-</button>
+<button class="inst" id="pourcent" value="%" onclick="pourcent()">%</button>
+<button class="inst" id="suppr" value="DEL" onclick="del()">DEL</button><br>
+
+<button class="chif" value="7" onclick="bt('7')">7</button>
+<button class="chif" value="8" onclick="bt('8')">8</button>
+<button class="chif" value="9" onclick="bt('9')">9</button>
+
+<button class="op" id="division" value="/" onclick="bt('/')">÷</button><br>
+
+<button class="chif" value="4" onclick="bt('4')">4</button>
+<button class="chif" value="5" onclick="bt('5')">5</button>
+<button class="chif" value="6" onclick="bt('6')">6</button>
+
+<button class="op" id="multiplication" value="x" onclick="bt('*')">×</button><br>
+
+<button class="chif" value="1" onclick="bt('1')">1</button>
+<button class="chif" value="2" onclick="bt('2')">2</button>
+<button class="chif" value="3" onclick="bt('3')">3</button>
+
+<button class="op" id="soustraction" value="-" onclick="bt('-')">-</button><br>
+
+<button class="chif" value="0" onclick="bt('0')">0</button>
+
+<button class="chif" id="virgule" value="." onclick="bt('.')">.</button>
+<button class="res" id="egale" value="=" onclick="calcul()">=</button>
+<button class="op" id="somme" value="+" onclick="bt('+')">+</button><br>
+
+</span>
